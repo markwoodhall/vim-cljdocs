@@ -1,0 +1,17 @@
+== Warning
+
+This is a very, very rough proof of concept, it might break, or produce errors that interrupt your workflow. It is currently working well for me.
+
+== Purpose
+
+vim-cljdocs is a simple vim plugin that loads documentation from https://clojuredocs.org into a scratch buffer. As well as documentation
+the plugin loads user contributed samples that can be eval'd from the buffer.
+
+The plugin only makes available one command, `ClojureDocs`.
+
+See the https://asciinema.org/a/261482[Demo]
+
+== Requirements
+
+- `curl`
+- `jq`
