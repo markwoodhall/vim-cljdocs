@@ -19,18 +19,22 @@ function! cljdocs#clojure_doc(sym) abort
     let line = substitute(line, '^"', '', '')
     let line = substitute(line, '"$', '', '')
     let embedded_lines = split(line, '\\n')
+
     for l in embedded_lines
       let output = output + [";;; " . trim(l)]
     endfor
+
   endfor
 
   for line in examples
     let line = substitute(line, '^"', '', '')
     let line = substitute(line, '"$', '', '')
     let embedded_lines = split(line, '\\n')
+
     for l in embedded_lines
       let output = output + [l]
     endfor
+
   endfor
 
   execute 'sp' sym.'.clj'
@@ -38,6 +42,7 @@ function! cljdocs#clojure_doc(sym) abort
     setlocal readonly
     normal! gg
     nnoremap <buffer> <ESC> :q!<CR>
+
 endfunction
 
 autocmd filetype * command! -nargs=1 -buffer ClojureDocs :call cljdocs#clojure_doc(<q-args>)
