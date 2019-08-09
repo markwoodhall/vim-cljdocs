@@ -5,8 +5,9 @@ endif
 let g:loaded_cljdocs = 1
 
 function! cljdocs#clojure_doc(sym) abort
-  let sym = split(a:sym, '/')[1]
-  let ns = split(a:sym, '/')[0]
+  let parts = split(a:sym, '/')
+  let sym = parts[1]
+  let ns = parts[0]
   let results = system("curl -s https://clojuredocs.org/clojuredocs-export.json | jq '.vars[] | select(.name == \"".sym."\" and .ns == \"".ns."\" ) | {doc,examples}' | jq '.doc,.examples[]?.body'")
   let output = []
 
