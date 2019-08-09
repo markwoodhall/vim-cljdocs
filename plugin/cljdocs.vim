@@ -11,8 +11,9 @@ function! cljdocs#clojure_doc(sym) abort
   let results = system("curl -s https://clojuredocs.org/clojuredocs-export.json | jq '.vars[] | select(.name == \"".sym."\" and .ns == \"".ns."\" ) | {doc,examples}' | jq '.doc,.examples[]?.body'")
   let output = []
 
-  let doc = split(results, '\n')[0]
-  let lines = split(results, '\n')[1:-1]
+  let lines = split(results, '\n')
+  let doc = lines[0]
+  let examples = lines[1:-1]
 
   for line in split(doc, '\n')
     let line = substitute(line, '^"', '', '')
@@ -23,7 +24,7 @@ function! cljdocs#clojure_doc(sym) abort
     endfor
   endfor
 
-  for line in lines
+  for line in examples
     let line = substitute(line, '^"', '', '')
     let line = substitute(line, '"$', '', '')
     let embedded_lines = split(line, '\\n')
