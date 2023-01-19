@@ -39,7 +39,9 @@ function! cljdocs#clojure_doc(sym) abort
 
   execute 'sp' sym.'.clj'
     call append(0, output)
-    setlocal readonly
+    setlocal buftype=nofile
+    setlocal bufhidden=hide
+    setlocal noswapfile
     normal! gg
     nnoremap <buffer> <ESC> :q!<CR>
 
